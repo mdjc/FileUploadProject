@@ -67,7 +67,8 @@ docker-compose up --build
 En caso de que necesites reiniciar completamente los contenedores y volúmenes de Docker para empezar desde cero, puedes ejecutar:
 
 ```bash
-docker-compose down -v
+docker-compose down -v 
+```
 
 ---
 
