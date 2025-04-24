@@ -27,36 +27,28 @@ public class ErrorHandlingMiddleware
         catch (FileNotFoundInRepositoryException ex)
         {
             _logger.LogWarning(ex.Message);
-
-            var problem = new ProblemDetails
-            {
-                Type = "https://httpstatuses.com/404",
-                Title = "File not found",
-                Status = StatusCodes.Status404NotFound,
-                Detail = ex.Message,
-                Instance = context.Request.Path
-            };
-
-            context.Response.StatusCode = problem.Status.Value;
-            context.Response.ContentType = "application/problem+json";
-            await context.Response.WriteAsync(JsonSerializer.Serialize(problem));
+            await WriteProblemDetailsAsync(context, StatusCodes.Status404NotFound, "File not found", ex.Message);
         }
         catch (Exception ex)
         {
             _logger.LogError(ex, "Unhandled exception");
-
-            var problem = new ProblemDetails
-            {
-                Type = "https://httpstatuses.com/500",
-                Title = "Internal Server Error",
-                Status = StatusCodes.Status500InternalServerError,
-                Detail = "An unexpected error occurred. Please try again later.",
-                Instance = context.Request.Path
-            };
-
-            context.Response.StatusCode = problem.Status.Value;
-            context.Response.ContentType = "application/problem+json";
-            await context.Response.WriteAsync(JsonSerializer.Serialize(problem));
+            await WriteProblemDetailsAsync(context, StatusCodes.Status500InternalServerError, "Internal Server Error", "An unexpected error occurred. Please try again later.");
         }
+    }
+
+    private async Task WriteProblemDetailsAsync(HttpContext context, int statusCode, string title, string detail)
+    {
+        var problem = new ProblemDetails
+        {
+            Type = $"https://httpstatuses.com/{statusCode}",
+            Title = title,
+            Status = statusCode,
+            Detail = detail,
+            Instance = context.Request.Path
+        };
+
+        context.Response.StatusCode = statusCode;
+        context.Response.ContentType = "application/problem+json";
+        await context.Response.WriteAsync(JsonSerializer.Serialize(problem));
     }
 }
