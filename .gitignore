@@ -1,0 +1,36 @@
+# .NET
+bin/
+obj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Rider
+.idea/
+
+# VS Code
+.vscode/
+
+# Logs
+*.log
+
+# Config local
+appsettings.*.json
+secrets.json
+
+# EF Core tools output
+Migrations/
+
+# Docker
+**/.container/
+**/docker-compose.override.yml
+
+# Build results
+*.dll
+*.exe
+*.app
+*.pdb
+
+# Mac system files
+.DS_Store
