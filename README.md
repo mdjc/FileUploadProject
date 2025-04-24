@@ -62,6 +62,13 @@ docker-compose up --build
 
 > ✅ Esta alternativa ejecuta el proyecto sin necesidad de scripts, usando directamente Docker Compose con variables de entorno.
 
+## 🔁 Restablecer entorno de Docker (opcional)
+
+En caso de que necesites reiniciar completamente los contenedores y volúmenes de Docker para empezar desde cero, puedes ejecutar:
+
+```bash
+docker-compose down -v
+
 ---
 
 ## 📑 Endpoints Disponibles
@@ -102,6 +109,9 @@ Este proyecto fue desarrollado siguiendo buenas prácticas de arquitectura en ca
 - Documentación automática con Swagger (`/swagger/index.html`)
 - Diseño simple sin patrones formales por simplicidad del reto, pero fácilmente extensible
 - Proyecto contenedorizado con Docker y Docker Compose para facilitar su ejecución y despliegue local sin necesidad de instalaciones manuales
+
+> 🔧 **Nota:** La carpeta `Migrations/` está incluida en el repositorio porque la base de datos se inicializa automáticamente al ejecutar la aplicación en Docker. Esto asegura que la estructura de la base de datos esté lista sin necesidad de pasos manuales adicionales, facilitando la revisión y la ejecución inmediata del proyecto.
+
 
 ### ✔️ Aplicación de principios SOLID
 

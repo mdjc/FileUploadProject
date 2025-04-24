@@ -19,9 +19,6 @@ obj/
 appsettings.*.json
 secrets.json
 
-# EF Core tools output
-Migrations/
-
 # Docker
 **/.container/
 **/docker-compose.override.yml
